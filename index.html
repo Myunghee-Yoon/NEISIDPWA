@@ -447,8 +447,10 @@
                             <tr>
                                 <th>과목코드</th>
                                 <th>성명</th>
-                                <th>연수원ID</th>
-                                <th>나이스번호</th>
+                                <th>ID</th>
+                                <th>나이스 번호</th>
+                                <th>오프라인 성적</th>
+                                <th>과제 점수</th>
                                 <th>기수</th>
                                 <th>차시</th>
                                 <th>운영기관</th>
@@ -653,6 +655,8 @@
                     participantName: participantName.toString().trim(),
                     foundationId: foundationId,
                     niceId: niceId,
+                    offlineScore: '',  // 오프라인 성적 (빈칸)
+                    assignmentScore: '',  // 과제 점수 (빈칸)
                     kisu: kisu,
                     operation: operationInput,
                     organization: 'kt cs',
@@ -677,6 +681,8 @@
                     <td>${result.participantName}</td>
                     <td class="${result.foundationId === '매칭된 이름 없음' ? 'no-match' : ''}">${result.foundationId}</td>
                     <td class="${result.niceId === '매칭된 이름 없음' ? 'no-match' : ''}">${result.niceId}</td>
+                    <td>${result.offlineScore}</td>
+                    <td>${result.assignmentScore}</td>
                     <td>${result.kisu}</td>
                     <td>${result.operation}</td>
                     <td>${result.organization}</td>
@@ -696,12 +702,14 @@
 
             try {
                 const dataWithHeader = [
-                    ['과목코드', '성명', '연수원ID', '나이스번호', '기수', '차시', '운영기관', '지역', '학교명'],
+                    ['과목코드', '성명', 'ID', '나이스 번호', '오프라인 성적', '과제 점수', '기수', '차시', '운영기관', '지역', '학교명'],
                     ...matchedResults.map(result => [
                         result.subjectCode,
                         result.participantName,
                         result.foundationId,
                         result.niceId,
+                        result.offlineScore,
+                        result.assignmentScore,
                         result.kisu,
                         result.operation,
                         result.organization,
@@ -730,10 +738,10 @@
                 return;
             }
 
-            let clipboardText = '과목코드\t성명\t연수원ID\t나이스번호\t기수\t차시\t운영기관\t지역\t학교명\n';
+            let clipboardText = '과목코드\t성명\tID\t나이스 번호\t오프라인 성적\t과제 점수\t기수\t차시\t운영기관\t지역\t학교명\n';
             
             matchedResults.forEach(result => {
-                clipboardText += `${result.subjectCode}\t${result.participantName}\t${result.foundationId}\t${result.niceId}\t${result.kisu}\t${result.operation}\t${result.organization}\t${result.region}\t${result.schoolName}\n`;
+                clipboardText += `${result.subjectCode}\t${result.participantName}\t${result.foundationId}\t${result.niceId}\t${result.offlineScore}\t${result.assignmentScore}\t${result.kisu}\t${result.operation}\t${result.organization}\t${result.region}\t${result.schoolName}\n`;
             });
             
             try {
