@@ -1,4 +1,4 @@
-const CACHE_NAME = 'attendance-matching-v2';
+const CACHE_NAME = 'attendance-matching-v4';
 const urlsToCache = [
     './',
     './index.html',
