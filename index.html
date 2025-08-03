@@ -16,9 +16,6 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="매칭앱">
     
-    <!-- 파비콘 -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzQ1YWNmZSI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIGZpbGw9IiM2NjdlZWEiPjwvY2lyY2xlPjx0ZXh0IHg9IjEyIiB5PSIxNiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iNiI+7YeE7J2065OcPC90ZXh0Pjwvc3ZnPg==">
-    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
         * {
@@ -48,7 +45,6 @@
             color: white;
             padding: 30px;
             text-align: center;
-            position: relative;
         }
 
         .header h1 {
@@ -60,42 +56,6 @@
         .header p {
             font-size: 1.1em;
             opacity: 0.9;
-            margin-bottom: 15px;
-        }
-
-        .install-header-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .install-header-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            border-color: rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
-        }
-
-        .offline-indicator {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: #ff6b6b;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.8em;
-            z-index: 1001;
-            display: none;
-        }
-
-        .offline-indicator.online {
-            background: #4caf50;
         }
 
         .content {
@@ -124,11 +84,6 @@
             transform: translateY(-2px);
         }
 
-        .upload-box.dragover {
-            border-color: #4facfe;
-            background: #e6f3ff;
-        }
-
         .upload-box h3 {
             color: #333;
             margin-bottom: 15px;
@@ -149,6 +104,8 @@
             font-size: 1em;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+            display: inline-block;
+            text-decoration: none;
         }
 
         .upload-btn:hover {
@@ -165,196 +122,13 @@
             font-weight: 500;
         }
 
-        .process-section {
-            text-align: center;
-            margin: 40px 0;
-        }
-
-        .process-btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .process-btn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .process-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .results-section {
-            margin-top: 40px;
-            display: none;
-        }
-
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .results-header h3 {
-            color: #333;
-            font-size: 1.5em;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action-btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .download-btn {
-            background: #4caf50;
-            color: white;
-        }
-
-        .copy-btn {
-            background: #2196f3;
-            color: white;
-        }
-
-        .install-btn {
-            background: #ff6b6b;
-            color: white;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .results-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .results-table th {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-
-        .results-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .results-table tr:nth-child(even) {
-            background: #f8f9fa;
-        }
-
-        .results-table tr:hover {
-            background: #e3f2fd;
-        }
-
-        .no-match {
-            color: #d32f2f;
-            font-weight: 500;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #fff, #f8f9fa);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border-left: 4px solid #4facfe;
-        }
-
-        .stat-number {
-            font-size: 2em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #4facfe;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #4caf50;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast.error {
-            background: #f44336;
-        }
-
         .input-section {
             background: #f8f9fa;
             border-radius: 15px;
             padding: 30px;
             margin: 30px 0;
             border: 2px solid #e3f2fd;
+            display: none;
         }
 
         .input-section h3 {
@@ -396,89 +170,257 @@
             box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
         }
 
+        .process-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .process-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .process-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .process-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .results-section {
+            margin-top: 40px;
+            display: none;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .results-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .results-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .results-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .no-match {
+            color: #d32f2f;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn {
+            background: #4caf50;
+            color: white;
+        }
+
+        .copy-btn {
+            background: #2196f3;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast.error {
+            background: #f44336;
+        }
+
         @media (max-width: 768px) {
             .upload-section {
                 grid-template-columns: 1fr;
             }
             
-            .stats {
+            .input-grid {
                 grid-template-columns: 1fr;
-            }
-            
-            .results-header {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .action-buttons {
-                width: 100%;
-                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 오프라인 상태 표시 -->
-    <div id="offlineIndicator" class="offline-indicator">
-        📡 오프라인 모드
-    </div>
-
     <div class="container">
         <div class="header">
             <h1>출석부-나이스ID 매칭 시스템</h1>
             <p>출석부 데이터와 나이스ID 데이터를 매칭하여 결과를 생성합니다</p>
-            <div id="installButtonContainer" style="display: none;">
-                <button class="install-header-btn" onclick="installApp()">
-                    📱 컴퓨터에 앱으로 설치하기
-                </button>
-            </div>
         </div>
 
         <div class="content">
             <div class="upload-section">
-                <div class="upload-box" id="attendanceBox">
+                <div class="upload-box">
                     <h3>📋 출석부 파일</h3>
                     <p>프로그램명, 학교명, 시작일, 이름 등이 포함된 파일</p>
                     <br>
-                    <button class="upload-btn" onclick="document.getElementById('attendanceFile').click()">
-                        파일 선택
-                    </button>
+                    <label for="attendanceFile" class="upload-btn">파일 선택</label>
                     <input type="file" id="attendanceFile" class="file-input" accept=".xlsx,.xls" />
                     <div id="attendanceInfo" class="file-info" style="display: none;"></div>
                 </div>
 
-                <div class="upload-box" id="niceBox">
+                <div class="upload-box">
                     <h3>🆔 나이스ID 파일</h3>
                     <p>번호, 성명, 재단종합교육연수원ID, 나이스번호가 포함된 파일</p>
                     <br>
-                    <button class="upload-btn" onclick="document.getElementById('niceFile').click()">
-                        파일 선택
-                    </button>
+                    <label for="niceFile" class="upload-btn">파일 선택</label>
                     <input type="file" id="niceFile" class="file-input" accept=".xlsx,.xls" />
                     <div id="niceInfo" class="file-info" style="display: none;"></div>
                 </div>
             </div>
 
             <!-- 추가 정보 입력 섹션 -->
-            <div class="input-section" id="inputSection" style="display: none;">
+            <div class="input-section" id="inputSection">
                 <h3>📝 추가 정보 입력</h3>
                 <div class="input-grid">
                     <div class="input-group">
                         <label for="programNameInput">프로그램명</label>
-                        <input type="text" id="programNameInput" placeholder="예: 찾아가는 학교 컨설팅" />
+                        <select id="programNameInput">
+                            <option value="">선택하세요</option>
+                            <option value="우리학교 알아보기(1기)">우리학교 알아보기(1기)</option>
+                            <option value="학교의 지속가능 리더십 함양(1기)">학교의 지속가능 리더십 함양(1기)</option>
+                            <option value="디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(1기)">디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(1기)</option>
+                            <option value="데이터 기반 현장 연구 지원(1기)">데이터 기반 현장 연구 지원(1기)</option>
+                            <option value="교과별 전문과정(1기)">교과별 전문과정(1기)</option>
+                            <option value="주제별 심화과정(1기)">주제별 심화과정(1기)</option>
+                            <option value="학교 교육과정 평가-환류(1기)">학교 교육과정 평가-환류(1기)</option>
+                            <option value="우리학교 알아보기(2기)">우리학교 알아보기(2기)</option>
+                            <option value="학교의 지속가능 리더십 함양(2기)">학교의 지속가능 리더십 함양(2기)</option>
+                            <option value="디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(2기)">디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(2기)</option>
+                            <option value="데이터 기반 현장 연구 지원(2기)">데이터 기반 현장 연구 지원(2기)</option>
+                            <option value="교과별 전문과정(2기)">교과별 전문과정(2기)</option>
+                            <option value="주제별 심화과정(2기)">주제별 심화과정(2기)</option>
+                            <option value="학교 교육과정 평가-환류(2기)">학교 교육과정 평가-환류(2기)</option>
+                            <option value="우리학교 알아보기(3기)">우리학교 알아보기(3기)</option>
+                            <option value="학교의 지속가능 리더십 함양(3기)">학교의 지속가능 리더십 함양(3기)</option>
+                            <option value="디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(3기)">디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(3기)</option>
+                            <option value="데이터 기반 현장 연구 지원(3기)">데이터 기반 현장 연구 지원(3기)</option>
+                            <option value="교과별 전문과정(3기)">교과별 전문과정(3기)</option>
+                            <option value="주제별 심화과정(3기)">주제별 심화과정(3기)</option>
+                            <option value="학교 교육과정 평가-환류(3기)">학교 교육과정 평가-환류(3기)</option>
+                            <option value="우리학교 알아보기(4기)">우리학교 알아보기(4기)</option>
+                            <option value="학교의 지속가능 리더십 함양(4기)">학교의 지속가능 리더십 함양(4기)</option>
+                            <option value="디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(4기)">디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(4기)</option>
+                            <option value="데이터 기반 현장 연구 지원(4기)">데이터 기반 현장 연구 지원(4기)</option>
+                            <option value="교과별 전문과정(4기)">교과별 전문과정(4기)</option>
+                            <option value="주제별 심화과정(4기)">주제별 심화과정(4기)</option>
+                            <option value="학교 교육과정 평가-환류(4기)">학교 교육과정 평가-환류(4기)</option>
+                            <option value="우리학교 알아보기(5기)">우리학교 알아보기(5기)</option>
+                            <option value="학교의 지속가능 리더십 함양(5기)">학교의 지속가능 리더십 함양(5기)</option>
+                            <option value="디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(5기)">디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(5기)</option>
+                            <option value="데이터 기반 현장 연구 지원(5기)">데이터 기반 현장 연구 지원(5기)</option>
+                            <option value="교과별 전문과정(5기)">교과별 전문과정(5기)</option>
+                            <option value="주제별 심화과정(5기)">주제별 심화과정(5기)</option>
+                            <option value="학교 교육과정 평가-환류(5기)">학교 교육과정 평가-환류(5기)</option>
+                            <option value="우리학교 알아보기(6기)">우리학교 알아보기(6기)</option>
+                            <option value="학교의 지속가능 리더십 함양(6기)">학교의 지속가능 리더십 함양(6기)</option>
+                            <option value="디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(6기)">디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(6기)</option>
+                            <option value="데이터 기반 현장 연구 지원(6기)">데이터 기반 현장 연구 지원(6기)</option>
+                            <option value="교과별 전문과정(6기)">교과별 전문과정(6기)</option>
+                            <option value="주제별 심화과정(6기)">주제별 심화과정(6기)</option>
+                            <option value="학교 교육과정 평가-환류(6기)">학교 교육과정 평가-환류(6기)</option>
+                            <option value="우리학교 알아보기(7기)">우리학교 알아보기(7기)</option>
+                            <option value="학교의 지속가능 리더십 함양(7기)">학교의 지속가능 리더십 함양(7기)</option>
+                            <option value="디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(7기)">디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(7기)</option>
+                            <option value="데이터 기반 현장 연구 지원(7기)">데이터 기반 현장 연구 지원(7기)</option>
+                            <option value="교과별 전문과정(7기)">교과별 전문과정(7기)</option>
+                            <option value="주제별 심화과정(7기)">주제별 심화과정(7기)</option>
+                            <option value="학교 교육과정 평가-환류(7기)">학교 교육과정 평가-환류(7기)</option>
+                            <option value="우리학교 알아보기(8기)">우리학교 알아보기(8기)</option>
+                            <option value="학교의 지속가능 리더십 함양(8기)">학교의 지속가능 리더십 함양(8기)</option>
+                            <option value="디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(8기)">디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(8기)</option>
+                            <option value="데이터 기반 현장 연구 지원(8기)">데이터 기반 현장 연구 지원(8기)</option>
+                            <option value="교과별 전문과정(8기)">교과별 전문과정(8기)</option>
+                            <option value="주제별 심화과정(8기)">주제별 심화과정(8기)</option>
+                            <option value="학교 교육과정 평가-환류(8기)">학교 교육과정 평가-환류(8기)</option>
+                        </select>
                     </div>
                     <div class="input-group">
-                        <label for="operationInput">운영 (차시)</label>
+                        <label for="operationInput">운영 차시</label>
                         <input type="number" id="operationInput" placeholder="예: 3" min="1" />
                     </div>
                     <div class="input-group">
-                        <label for="categoryInput">구분</label>
-                        <select id="categoryInput">
+                        <label for="regionInput">지역</label>
+                        <select id="regionInput">
                             <option value="">선택하세요</option>
-                            <option value="교직원">교직원</option>
-                            <option value="학부모">학부모</option>
-                            <option value="학생">학생</option>
+                            <option value="서울특별시">서울특별시</option>
+                            <option value="부산광역시">부산광역시</option>
+                            <option value="대구광역시">대구광역시</option>
+                            <option value="인천광역시">인천광역시</option>
+                            <option value="광주광역시">광주광역시</option>
+                            <option value="대전광역시">대전광역시</option>
+                            <option value="울산광역시">울산광역시</option>
+                            <option value="세종특별자치시">세종특별자치시</option>
+                            <option value="경기도">경기도</option>
+                            <option value="강원특별자치도">강원특별자치도</option>
+                            <option value="충청북도">충청북도</option>
+                            <option value="충청남도">충청남도</option>
+                            <option value="전북특별자치도">전북특별자치도</option>
+                            <option value="전라남도">전라남도</option>
+                            <option value="경상북도">경상북도</option>
+                            <option value="경상남도">경상남도</option>
+                            <option value="제주특별자치도">제주특별자치도</option>
                         </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="schoolNameInput">학교명</label>
+                        <input type="text" id="schoolNameInput" placeholder="예: 서울초등학교" />
                     </div>
                 </div>
             </div>
@@ -489,40 +431,29 @@
                 </button>
             </div>
 
-            <div class="loading" id="loading">
-                <div class="spinner"></div>
-                <p>데이터를 처리하고 있습니다...</p>
-            </div>
-
             <div class="results-section" id="resultsSection">
-                <div class="stats" id="stats"></div>
-                
-                <div class="results-header">
-                    <h3>📊 매칭 결과</h3>
-                    <div class="action-buttons">
-                        <button class="action-btn download-btn" onclick="downloadResults()">
-                            💾 엑셀 다운로드
-                        </button>
-                        <button class="action-btn copy-btn" onclick="copyToClipboard()">
-                            📋 클립보드 복사
-                        </button>
-                    </div>
+                <div class="action-buttons">
+                    <button class="action-btn download-btn" onclick="downloadResults()">
+                        💾 엑셀 다운로드
+                    </button>
+                    <button class="action-btn copy-btn" onclick="copyToClipboard()">
+                        📋 클립보드 복사
+                    </button>
                 </div>
 
                 <div style="overflow-x: auto;">
                     <table class="results-table" id="resultsTable">
                         <thead>
                             <tr>
-                                <th>과정명</th>
-                                <th>프로그램명</th>
-                                <th>시작일</th>
-                                <th>종료일</th>
-                                <th>운영</th>
-                                <th>구분</th>
-                                <th>참여자명</th>
-                                <th>NEIS(교직원만 해당)</th>
-                                <th>연수원 연수 이수처리 여부 (교원만 해당)</th>
-                                <th>이수 (연수원 연수 이수자만 작성)</th>
+                                <th>과목코드</th>
+                                <th>성명</th>
+                                <th>연수원ID</th>
+                                <th>나이스번호</th>
+                                <th>기수</th>
+                                <th>차시</th>
+                                <th>운영기관</th>
+                                <th>지역</th>
+                                <th>학교명</th>
                             </tr>
                         </thead>
                         <tbody id="resultsBody">
@@ -537,137 +468,28 @@
         let attendanceData = null;
         let niceData = null;
         let matchedResults = [];
-        let deferredPrompt;
 
-        // 서비스 워커 등록 (외부 파일만 사용)
-        function registerServiceWorker() {
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(registration => {
-                        console.log('서비스 워커 등록 성공:', registration);
-                        
-                        // 업데이트 확인
-                        registration.addEventListener('updatefound', () => {
-                            const newWorker = registration.installing;
-                            newWorker.addEventListener('statechange', () => {
-                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    showToast('새 버전이 available합니다. 페이지를 새로고침해주세요.');
-                                }
-                            });
-                        });
-                    })
-                    .catch(error => {
-                        console.log('서비스 워커 등록 실패:', error);
-                        console.log('서비스 워커 없이 기본 기능 동작');
-                    });
-            }
-        }
-
-        // 네트워크 상태 모니터링
-        function setupNetworkMonitoring() {
-            const offlineIndicator = document.getElementById('offlineIndicator');
-            
-            function updateOnlineStatus() {
-                if (navigator.onLine) {
-                    offlineIndicator.style.display = 'none';
-                } else {
-                    offlineIndicator.textContent = '📡 오프라인 모드';
-                    offlineIndicator.classList.remove('online');
-                    offlineIndicator.style.display = 'block';
+        // 파일 입력 이벤트 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            // 출석부 파일 이벤트
+            document.getElementById('attendanceFile').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    document.getElementById('attendanceInfo').style.display = 'block';
+                    document.getElementById('attendanceInfo').textContent = `선택된 파일: ${file.name}`;
+                    readExcelFile(file, 'attendance');
                 }
-            }
-
-            window.addEventListener('online', updateOnlineStatus);
-            window.addEventListener('offline', updateOnlineStatus);
-            updateOnlineStatus();
-        }
-
-        // PWA 설치 이벤트 처리
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            showInstallButtonInHeader();
-        });
-
-        function showInstallButtonInHeader() {
-            const installContainer = document.getElementById('installButtonContainer');
-            if (installContainer) {
-                installContainer.style.display = 'block';
-            }
-        }
-
-        async function installApp() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                
-                if (outcome === 'accepted') {
-                    showToast('앱이 설치되었습니다! 바탕화면에서 확인해보세요.');
-                    document.getElementById('installButtonContainer').style.display = 'none';
-                    document.querySelector('.install-btn')?.remove();
-                } else {
-                    showToast('설치가 취소되었습니다.');
-                }
-                
-                deferredPrompt = null;
-            } else {
-                showToast('이 브라우저에서는 앱 설치가 지원되지 않습니다. Chrome 또는 Edge를 사용해보세요.', 'error');
-            }
-        }
-
-        // PWA가 설치된 후 설치 완료 이벤트
-        window.addEventListener('appinstalled', (e) => {
-            showToast('앱이 성공적으로 설치되었습니다!');
-            document.getElementById('installButtonContainer').style.display = 'none';
-        });
-
-        // 드래그 앤 드롭 기능
-        function setupDragDrop() {
-            ['attendanceBox', 'niceBox'].forEach(boxId => {
-                const box = document.getElementById(boxId);
-                
-                box.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    box.classList.add('dragover');
-                });
-                
-                box.addEventListener('dragleave', () => {
-                    box.classList.remove('dragover');
-                });
-                
-                box.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    box.classList.remove('dragover');
-                    
-                    const files = e.dataTransfer.files;
-                    if (files.length > 0) {
-                        const input = boxId === 'attendanceBox' ? 
-                            document.getElementById('attendanceFile') : 
-                            document.getElementById('niceFile');
-                        input.files = files;
-                        input.dispatchEvent(new Event('change'));
-                    }
-                });
             });
-        }
 
-        // 파일 업로드 이벤트
-        document.getElementById('attendanceFile').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                document.getElementById('attendanceInfo').style.display = 'block';
-                document.getElementById('attendanceInfo').textContent = `선택된 파일: ${file.name}`;
-                readExcelFile(file, 'attendance');
-            }
-        });
-
-        document.getElementById('niceFile').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                document.getElementById('niceInfo').style.display = 'block';
-                document.getElementById('niceInfo').textContent = `선택된 파일: ${file.name}`;
-                readExcelFile(file, 'nice');
-            }
+            // 나이스ID 파일 이벤트
+            document.getElementById('niceFile').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    document.getElementById('niceInfo').style.display = 'block';
+                    document.getElementById('niceInfo').textContent = `선택된 파일: ${file.name}`;
+                    readExcelFile(file, 'nice');
+                }
+            });
         });
 
         // 엑셀 파일 읽기
@@ -707,71 +529,96 @@
         function processFiles() {
             const programNameInput = document.getElementById('programNameInput').value.trim();
             const operationInput = document.getElementById('operationInput').value.trim();
-            const categoryInput = document.getElementById('categoryInput').value;
+            const regionInput = document.getElementById('regionInput').value;
+            const schoolNameInput = document.getElementById('schoolNameInput').value.trim();
 
-            if (!programNameInput || !operationInput || !categoryInput) {
-                showToast('프로그램명, 운영(차시), 구분을 모두 입력해주세요.', 'error');
+            if (!programNameInput || !operationInput || !regionInput || !schoolNameInput) {
+                showToast('모든 필드를 입력해주세요.', 'error');
                 return;
             }
 
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('resultsSection').style.display = 'none';
-            
-            setTimeout(() => {
-                try {
-                    matchedResults = matchData(programNameInput, operationInput, categoryInput);
-                    displayResults();
-                    document.getElementById('loading').style.display = 'none';
-                    document.getElementById('resultsSection').style.display = 'block';
-                    showToast('매칭이 완료되었습니다!');
-                    
-                    // 결과 화면에서 설치 버튼 표시 (아직 설치되지 않은 경우)
-                    if (deferredPrompt) {
-                        showInstallButton();
-                    }
-                } catch (error) {
-                    console.error('처리 오류:', error);
-                    document.getElementById('loading').style.display = 'none';
-                    showToast('처리 중 오류가 발생했습니다.', 'error');
-                }
-            }, 1000);
-        }
-
-        // 결과 화면에 설치 버튼 추가
-        function showInstallButton() {
-            const actionButtons = document.querySelector('.action-buttons');
-            if (actionButtons && !document.querySelector('.install-btn')) {
-                const installButton = document.createElement('button');
-                installButton.className = 'action-btn install-btn';
-                installButton.innerHTML = '📱 앱으로 설치';
-                installButton.onclick = installApp;
-                actionButtons.appendChild(installButton);
+            try {
+                matchedResults = matchData(programNameInput, operationInput, regionInput, schoolNameInput);
+                displayResults();
+                document.getElementById('resultsSection').style.display = 'block';
+                showToast('매칭이 완료되었습니다!');
+            } catch (error) {
+                console.error('처리 오류:', error);
+                showToast('처리 중 오류가 발생했습니다.', 'error');
             }
         }
 
         // 데이터 매칭 로직
-        function matchData(programNameInput, operationInput, categoryInput) {
+        function matchData(programNameInput, operationInput, regionInput, schoolNameInput) {
             const results = [];
             
-            // 과정명 매핑 테이블
-            const courseMapping = {
-                '우리학교 알아보기': '00. 우리학교 알아보기',
-                '학교의 지속가능 리더십 함양': '01. 학교의 지속가능 리더십 함양',
-                '교실혁명을 위한 학부모의 이해': '02. 교실혁명을 위한 학부모의 이해',
-                '학생 대상 디지털 문해 교육': '03. 학생 대상 디지털 문해 교육',
-                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원': '04. 디지털 교육 도구 활용 및 기술적 애로사항 해소 지원',
-                '데이터 기반 현장 연구 지원': '05. 데이터 기반 현장 연구 지원',
-                '교과별 전문과정': '06. 교과별 전문과정',
-                '주제별 심화과정': '07. 주제별 심화과정',
-                '학교 교육과정 평가-환류': '08. 학교 교육과정 평가-환류',
-                '[특화] 디지털 전환 시대의 교사 리셋': '09. [특화] 디지털 전환 시대의 교사 리셋',
-                '[특화] 디지털 평가의 모든 것': '10. [특화] 디지털 평가의 모든 것',
-                '심층면담': '#. 심층면담',
-                '사전회의': '#. 사전회의',
-                '사후회의': '#. 사후회의'
+            // 과목코드 매핑 테이블
+            const subjectCodeMapping = {
+                '우리학교 알아보기(1기)': '1000',
+                '학교의 지속가능 리더십 함양(1기)': '1001',
+                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(1기)': '1004',
+                '데이터 기반 현장 연구 지원(1기)': '1005',
+                '교과별 전문과정(1기)': '1006',
+                '주제별 심화과정(1기)': '1007',
+                '학교 교육과정 평가-환류(1기)': '1008',
+                '우리학교 알아보기(2기)': '2000',
+                '학교의 지속가능 리더십 함양(2기)': '2001',
+                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(2기)': '2004',
+                '데이터 기반 현장 연구 지원(2기)': '2005',
+                '교과별 전문과정(2기)': '2006',
+                '주제별 심화과정(2기)': '2007',
+                '학교 교육과정 평가-환류(2기)': '2008',
+                '우리학교 알아보기(3기)': '3000',
+                '학교의 지속가능 리더십 함양(3기)': '3001',
+                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(3기)': '3004',
+                '데이터 기반 현장 연구 지원(3기)': '3005',
+                '교과별 전문과정(3기)': '3006',
+                '주제별 심화과정(3기)': '3007',
+                '학교 교육과정 평가-환류(3기)': '3008',
+                '우리학교 알아보기(4기)': '4000',
+                '학교의 지속가능 리더십 함양(4기)': '4001',
+                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(4기)': '4004',
+                '데이터 기반 현장 연구 지원(4기)': '4005',
+                '교과별 전문과정(4기)': '4006',
+                '주제별 심화과정(4기)': '4007',
+                '학교 교육과정 평가-환류(4기)': '4008',
+                '우리학교 알아보기(5기)': '5000',
+                '학교의 지속가능 리더십 함양(5기)': '5001',
+                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(5기)': '5004',
+                '데이터 기반 현장 연구 지원(5기)': '5005',
+                '교과별 전문과정(5기)': '5006',
+                '주제별 심화과정(5기)': '5007',
+                '학교 교육과정 평가-환류(5기)': '5008',
+                '우리학교 알아보기(6기)': '6000',
+                '학교의 지속가능 리더십 함양(6기)': '6001',
+                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(6기)': '6004',
+                '데이터 기반 현장 연구 지원(6기)': '6005',
+                '교과별 전문과정(6기)': '6006',
+                '주제별 심화과정(6기)': '6007',
+                '학교 교육과정 평가-환류(6기)': '6008',
+                '우리학교 알아보기(7기)': '7000',
+                '학교의 지속가능 리더십 함양(7기)': '7001',
+                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(7기)': '7004',
+                '데이터 기반 현장 연구 지원(7기)': '7005',
+                '교과별 전문과정(7기)': '7006',
+                '주제별 심화과정(7기)': '7007',
+                '학교 교육과정 평가-환류(7기)': '7008',
+                '우리학교 알아보기(8기)': '8000',
+                '학교의 지속가능 리더십 함양(8기)': '8001',
+                '디지털 교육 도구 활용 및 기술적 애로사항 해소 지원(8기)': '8004',
+                '데이터 기반 현장 연구 지원(8기)': '8005',
+                '교과별 전문과정(8기)': '8006',
+                '주제별 심화과정(8기)': '8007',
+                '학교 교육과정 평가-환류(8기)': '8008'
             };
+
+            // 기수 추출 함수
+            function extractKisu(programName) {
+                const match = programName.match(/\((\d+)기\)/);
+                return match ? match[1] : '';
+            }
             
-            // 나이스 데이터를 맵으로 변환 (빠른 검색을 위해)
+            // 나이스 데이터를 맵으로 변환
             const niceMap = new Map();
             for (let i = 1; i < niceData.length; i++) {
                 const row = niceData[i];
@@ -788,63 +635,33 @@
             // 출석부 데이터 처리
             for (let i = 1; i < attendanceData.length; i++) {
                 const row = attendanceData[i];
-                const originalCourseName = row[0] || '';
-                const schoolName = row[1] || '';
-                const startDate = row[2] || '';
                 const participantName = row[3] || '';
-                
-                if (!originalCourseName || originalCourseName.toString().trim() === '') {
-                    continue;
-                }
                 
                 if (!participantName || participantName.toString().trim() === '') {
                     continue;
                 }
                 
-                let endDate = startDate;
-                
                 const matchedData = niceMap.get(participantName.toString().trim());
+                const foundationId = matchedData ? matchedData.foundationId : '매칭된 이름 없음';
                 const niceId = matchedData ? matchedData.niceId : '매칭된 이름 없음';
                 
-                const mappedCourseName = courseMapping[originalCourseName.toString().trim()] || originalCourseName.toString().trim();
-                
-                const operationText = operationInput + '차시';
-                const trainingProcessing = categoryInput === '교직원' ? 'O' : '';
-                const completion = categoryInput === '교직원' ? operationInput : '';
+                const subjectCode = subjectCodeMapping[programNameInput] || '';
+                const kisu = extractKisu(programNameInput);
                 
                 results.push({
-                    courseName: mappedCourseName,
-                    programName: programNameInput,
-                    startDate: formatDate(startDate),
-                    endDate: formatDate(endDate),
-                    operation: operationText,
-                    category: categoryInput,
+                    subjectCode: subjectCode,
                     participantName: participantName.toString().trim(),
+                    foundationId: foundationId,
                     niceId: niceId,
-                    trainingProcessing: trainingProcessing,
-                    completion: completion
+                    kisu: kisu,
+                    operation: operationInput,
+                    organization: 'kt cs',
+                    region: regionInput,
+                    schoolName: schoolNameInput
                 });
             }
             
             return results;
-        }
-
-        // 날짜 포맷팅
-        function formatDate(dateValue) {
-            if (!dateValue) return '';
-            
-            if (typeof dateValue === 'number') {
-                const date = XLSX.SSF.parse_date_code(dateValue);
-                return `${date.y}-${String(date.m).padStart(2, '0')}-${String(date.d).padStart(2, '0')}`;
-            }
-            
-            if (typeof dateValue === 'string') {
-                if (/^\d{4}-\d{2}-\d{2}$/.test(dateValue)) {
-                    return dateValue;
-                }
-            }
-            
-            return dateValue.toString();
         }
 
         // 결과 표시
@@ -852,59 +669,22 @@
             const tbody = document.getElementById('resultsBody');
             tbody.innerHTML = '';
             
-            let matchedCount = 0;
-            let unmatchedCount = 0;
-            
             matchedResults.forEach(result => {
                 const row = document.createElement('tr');
                 
-                if (result.niceId === '매칭된 이름 없음') {
-                    unmatchedCount++;
-                } else {
-                    matchedCount++;
-                }
-                
                 row.innerHTML = `
-                    <td>${result.courseName}</td>
-                    <td>${result.programName}</td>
-                    <td>${result.startDate}</td>
-                    <td>${result.endDate}</td>
-                    <td>${result.operation}</td>
-                    <td>${result.category}</td>
+                    <td>${result.subjectCode}</td>
                     <td>${result.participantName}</td>
+                    <td class="${result.foundationId === '매칭된 이름 없음' ? 'no-match' : ''}">${result.foundationId}</td>
                     <td class="${result.niceId === '매칭된 이름 없음' ? 'no-match' : ''}">${result.niceId}</td>
-                    <td>${result.trainingProcessing}</td>
-                    <td>${result.completion}</td>
+                    <td>${result.kisu}</td>
+                    <td>${result.operation}</td>
+                    <td>${result.organization}</td>
+                    <td>${result.region}</td>
+                    <td>${result.schoolName}</td>
                 `;
                 tbody.appendChild(row);
             });
-            
-            displayStats(matchedResults.length, matchedCount, unmatchedCount);
-        }
-
-        // 통계 표시
-        function displayStats(total, matched, unmatched) {
-            const statsDiv = document.getElementById('stats');
-            const matchRate = total > 0 ? ((matched / total) * 100).toFixed(1) : 0;
-            
-            statsDiv.innerHTML = `
-                <div class="stat-card">
-                    <div class="stat-number">${total}</div>
-                    <div class="stat-label">총 참여자</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">${matched}</div>
-                    <div class="stat-label">매칭 성공</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">${unmatched}</div>
-                    <div class="stat-label">매칭 실패</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">${matchRate}%</div>
-                    <div class="stat-label">매칭률</div>
-                </div>
-            `;
         }
 
         // 엑셀 다운로드
@@ -916,95 +696,31 @@
 
             try {
                 const dataWithHeader = [
-                    ['과정명', '프로그램명', '시작일', '종료일', '운영', '구분', '참여자명', 'NEIS(교직원만 해당)', '연수원 연수 이수처리 여부 (교원만 해당)', '이수 (연수원 연수 이수자만 작성)'],
+                    ['과목코드', '성명', '연수원ID', '나이스번호', '기수', '차시', '운영기관', '지역', '학교명'],
                     ...matchedResults.map(result => [
-                        result.courseName,
-                        result.programName,
-                        result.startDate,
-                        result.endDate,
-                        result.operation,
-                        result.category,
+                        result.subjectCode,
                         result.participantName,
+                        result.foundationId,
                         result.niceId,
-                        result.trainingProcessing,
-                        result.completion
+                        result.kisu,
+                        result.operation,
+                        result.organization,
+                        result.region,
+                        result.schoolName
                     ])
                 ];
 
                 const ws = XLSX.utils.aoa_to_sheet(dataWithHeader);
-                
-                const colWidths = [
-                    { wch: 35 }, { wch: 25 }, { wch: 12 }, { wch: 12 }, { wch: 10 },
-                    { wch: 12 }, { wch: 15 }, { wch: 20 }, { wch: 25 }, { wch: 20 }
-                ];
-                ws['!cols'] = colWidths;
-                
                 const wb = XLSX.utils.book_new();
                 XLSX.utils.book_append_sheet(wb, ws, '매칭결과');
                 
                 const fileName = `출석부_나이스ID_매칭결과_${new Date().toISOString().slice(0, 10)}.xlsx`;
-                
-                try {
-                    XLSX.writeFile(wb, fileName);
-                    showToast('파일이 다운로드되었습니다!');
-                } catch (writeError) {
-                    const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
-                    const blob = new Blob([wbout], { 
-                        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' 
-                    });
-                    
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.download = fileName;
-                    
-                    document.body.appendChild(a);
-                    a.click();
-                    
-                    setTimeout(() => {
-                        document.body.removeChild(a);
-                        window.URL.revokeObjectURL(url);
-                    }, 100);
-                    
-                    showToast('파일이 다운로드되었습니다!');
-                }
-                
+                XLSX.writeFile(wb, fileName);
+                showToast('파일이 다운로드되었습니다!');
             } catch (error) {
                 console.error('다운로드 오류:', error);
-                const csvContent = generateCSV();
-                downloadAsCSV(csvContent);
+                showToast('다운로드 중 오류가 발생했습니다.', 'error');
             }
-        }
-
-        // CSV 생성 및 다운로드
-        function generateCSV() {
-            let csv = '과정명,프로그램명,시작일,종료일,운영,구분,참여자명,NEIS(교직원만 해당),연수원 연수 이수처리 여부 (교원만 해당),이수 (연수원 연수 이수자만 작성)\n';
-            matchedResults.forEach(result => {
-                csv += `"${result.courseName}","${result.programName}","${result.startDate}","${result.endDate}","${result.operation}","${result.category}","${result.participantName}","${result.niceId}","${result.trainingProcessing}","${result.completion}"\n`;
-            });
-            return csv;
-        }
-
-        function downloadAsCSV(csvContent) {
-            const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
-            const fileName = `출석부_나이스ID_매칭결과_${new Date().toISOString().slice(0, 10)}.csv`;
-            
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = fileName;
-            
-            document.body.appendChild(a);
-            a.click();
-            
-            setTimeout(() => {
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            }, 100);
-            
-            showToast('CSV 파일로 다운로드되었습니다!');
         }
 
         // 클립보드 복사
@@ -1014,47 +730,23 @@
                 return;
             }
 
-            let clipboardText = '과정명\t프로그램명\t시작일\t종료일\t운영\t구분\t참여자명\tNEIS(교직원만 해당)\t연수원 연수 이수처리 여부 (교원만 해당)\t이수 (연수원 연수 이수자만 작성)\n';
+            let clipboardText = '과목코드\t성명\t연수원ID\t나이스번호\t기수\t차시\t운영기관\t지역\t학교명\n';
             
             matchedResults.forEach(result => {
-                clipboardText += `${result.courseName}\t${result.programName}\t${result.startDate}\t${result.endDate}\t${result.operation}\t${result.category}\t${result.participantName}\t${result.niceId}\t${result.trainingProcessing}\t${result.completion}\n`;
+                clipboardText += `${result.subjectCode}\t${result.participantName}\t${result.foundationId}\t${result.niceId}\t${result.kisu}\t${result.operation}\t${result.organization}\t${result.region}\t${result.schoolName}\n`;
             });
             
             try {
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     await navigator.clipboard.writeText(clipboardText);
-                    showToast('헤더 포함 데이터가 클립보드에 복사되었습니다!');
+                    showToast('데이터가 클립보드에 복사되었습니다!');
                 } else {
-                    fallbackCopy(clipboardText);
+                    showToast('클립보드 복사가 지원되지 않습니다.', 'error');
                 }
             } catch (err) {
-                fallbackCopy(clipboardText);
+                console.error('복사 실패:', err);
+                showToast('복사에 실패했습니다.', 'error');
             }
-        }
-
-        function fallbackCopy(text) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.left = '-999999px';
-            textArea.style.top = '-999999px';
-            textArea.style.opacity = '0';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showToast('헤더 포함 데이터가 클립보드에 복사되었습니다!');
-                } else {
-                    showToast('복사에 실패했습니다. 수동으로 테이블을 선택해서 복사해주세요.', 'error');
-                }
-            } catch (err) {
-                showToast('복사에 실패했습니다. 수동으로 테이블을 선택해서 복사해주세요.', 'error');
-            }
-            
-            document.body.removeChild(textArea);
         }
 
         // 토스트 메시지
@@ -1071,16 +763,6 @@
                 setTimeout(() => document.body.removeChild(toast), 300);
             }, 3000);
         }
-
-        // 초기화 함수들
-        function init() {
-            registerServiceWorker();
-            setupNetworkMonitoring();
-            setupDragDrop();
-        }
-
-        // 페이지 로드 시 초기화
-        window.addEventListener('load', init);
     </script>
 </body>
 </html>
